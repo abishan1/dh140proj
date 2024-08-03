@@ -19,5 +19,4 @@ Lastly, I looked at "Sources of income, and expenditures, for college athletics.
 **Potential Final Project Ideas**
 A question that I want to answer through the research for my final project is "How can data trends help build a strong, truthful claim?" Through my research, I want to be careful of accidentally portraying misinformation or a false narrative with data analysis. The research idea that I have the strongest interest in is the "Death in US jails" dataset. The dataset is very large, with death data from different county prisons per state. My plan is to analyze only a subset of California counties and see what the trend shows. Some potential claims that could be made are how certain prisons are strict with the wellness of inmates, while others are not. Moreover, certain prisons may have an increase in deaths, which could mean that certain laws (regarding prison management) became lax.
 
-
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/abishan1/dgt_hum_140/main)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/abishan1/dh140proj/HEAD)
