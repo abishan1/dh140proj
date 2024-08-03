@@ -24,3 +24,4 @@ jobs:
           git add .
           git commit -m 'Deploy site'
           git push --force origin `HEAD:refs/heads/gh-pages`
+git add .github/workflows/deploy.yml
