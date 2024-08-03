@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Abishan Sutharshan">
+
+<title>Final Project: Analyzing Death Tolls in Prisons – DH 140 Final Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">DH 140 Final Project</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.qmd"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.qmd"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./finalproject.html" aria-current="page"> 
+<span class="menu-text">Project</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Final Project: Analyzing Death Tolls in Prisons</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Abishan Sutharshan </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="table-of-contents" class="level3">
+<h3 class="anchored" data-anchor-id="table-of-contents">Table of Contents:</h3>
+<section id="section-1-introduction" class="level5">
+<h5 class="anchored" data-anchor-id="section-1-introduction"><strong>Section 1:</strong> Introduction</h5>
+</section>
+<section id="section-2-exploring-trends-in-the-causes-of-death-and-the-death-tolls" class="level5">
+<h5 class="anchored" data-anchor-id="section-2-exploring-trends-in-the-causes-of-death-and-the-death-tolls"><strong>Section 2:</strong> Exploring Trends in the Causes of Death, and the Death Tolls</h5>
+</section>
+<section id="section-3-gender-disparities-in-california-jails" class="level5">
+<h5 class="anchored" data-anchor-id="section-3-gender-disparities-in-california-jails"><strong>Section 3</strong>: Gender Disparities in California Jails</h5>
+</section>
+<section id="section-4-more-visualizations-and-concluding-remarks" class="level5">
+<h5 class="anchored" data-anchor-id="section-4-more-visualizations-and-concluding-remarks"><strong>Section 4:</strong> More Visualizations and Concluding Remarks</h5>
+</section>
+</section>
+<section id="section-1-introduction-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1-introduction-1">Section 1: Introduction</h2>
+<p>In my final project, I will explore trends in the prison death data from Reuters. This data was collected to publicize the deaths that occur in jails across all 50 states between 2008 and 2019. Without this data collection initiative, this data would not be public. Reuters sent out 1,500+ requests to access this data, which state governments are required to respond to. Through coding up this notebook, I aim to understand trends in the data, like what are the highest causes of death in California, or how deaths have increased/decreased over time. (https://www.reuters.com/investigates/special-report/usa-jails-graphic/).</p>
+<p><strong>One question that I’d like to answer is “What are the leading factors that influence death tolls in California jails and how can they be mitigated?”</strong></p>
+<p>While coding and analyzing the data, I will be careful of accidentally portraying misinformation or a false narrative with the data analysis. I will also be sure to make claims about my data visualizations and support them with research, or disprove the claim to understand biases in the data.</p>
+<p>Let’s start by exploring the data for inmate deaths in California. When downloading the CSV format of the data on the website, I get back a folder with 3 files, which are attached to this repository: 1. California_deaths.csv 2. California_jails.csv 3. reuters-jail-deaths-code.xlsx</p>
+<p>File 2 provides 39 California jails and their IDs, with the note for each jail stating: “In 2011, a California law known as “realignment” shifted the incarceration of “non-serious, non-violent, non-sex” convicts from state prisons to county jails. As a result, jail inmates in California may have longer average stays than jail inmates in other states. Sheriffs often complain the change puts substantial staffing and budget pressures on jails without adequate funding.” This file is simply metadata and is not our main data of interest.</p>
+<p>File 3 provides more metadata for the codes in the CSV file. For example, “d2008” means “total deaths in 2008” and “il2008” means “illness/natural deaths in 2008.” This is also not the main data of interest.</p>
+<p>The main data of interest is in File 1. I will display a few rows just to show what the format is like.</p>
+<div id="9a2d2a79" class="cell" data-trusted="true" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>deaths_data <span class="op">=</span> pd.read_csv(<span class="st">"California_deaths.csv"</span>, encoding<span class="op">=</span><span class="st">'ISO-8859-1'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># sample the first 10 rows of the file</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>deaths_sample <span class="op">=</span> deaths_data.head(<span class="dv">10</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(deaths_sample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     id state   county                                             jail  year  \
+0  36.0    CA  Alameda  Alameda County Glenn E. Dyer Detention Facility  2010   
+1  36.0    CA  Alameda  Alameda County Glenn E. Dyer Detention Facility  2011   
+2  36.0    CA  Alameda  Alameda County Glenn E. Dyer Detention Facility  2011   
+3  36.0    CA  Alameda  Alameda County Glenn E. Dyer Detention Facility  2014   
+4  36.0    CA  Alameda  Alameda County Glenn E. Dyer Detention Facility  2015   
+5  35.0    CA  Alameda                   Alameda County Santa Rita Jail  2008   
+6  35.0    CA  Alameda                   Alameda County Santa Rita Jail  2008   
+7  35.0    CA  Alameda                   Alameda County Santa Rita Jail  2008   
+8  35.0    CA  Alameda                   Alameda County Santa Rita Jail  2008   
+9  35.0    CA  Alameda                   Alameda County Santa Rita Jail  2008   
+
+  date_of_death full_name last_name first_name mid_name  ... cause_short  \
+0     5/13/2010       NaN   JOHNSON    RICHARD      NaN  ...           M   
+1      5/7/2011       NaN  SIRAGUSA    BRANDON  MICHAEL  ...           M   
+2     5/20/2011       NaN    HUERTA    MICHAEL    WALLY  ...          DA   
+3      6/3/2014       NaN      CHAU       DUOC      NaN  ...           S   
+4     3/30/2015       NaN   CORNEJO       JOHN  ANTHONY  ...          DA   
+5     3/20/2008       NaN  DECLERCQ   MARGARET     JANE  ...          DA   
+6     6/25/2008       NaN   JENKINS     ALBERT  RAYMOND  ...          DA   
+7      9/6/2008       NaN     PARKS     THOMAS     HALL  ...           M   
+8      1/3/2008       NaN    DENHAM    KENNETH      NaN  ...           M   
+9      9/3/2008       NaN       DEO        IST      NaN  ...           M   
+
+            cause_detail         dob yob age  race  race_detail gender  \
+0                    NaN  12/15/1959 NaN NaN     B          NaN      M   
+1                    NaN   1/29/1986 NaN NaN     W          NaN      M   
+2          Drug Overdose    2/5/1986 NaN NaN     H          NaN      M   
+3  Hanging,Strangulation  11/21/1975 NaN NaN     A  Other Asian      M   
+4          Drug Overdose   1/19/1995 NaN NaN     H          NaN      M   
+5          Drug Overdose   7/23/1952 NaN NaN     W          NaN      F   
+6          Drug Overdose   1/24/1973 NaN NaN     B          NaN      M   
+7                    NaN   3/18/1956 NaN NaN     W          NaN      M   
+8                    NaN    7/4/1959 NaN NaN     B          NaN      M   
+9                    NaN   10/5/1964 NaN NaN     O          NaN      M   
+
+  custody_status what_info_from_media  
+0              C                  NaN  
+1              U                  NaN  
+2              U                  NaN  
+3              U                  NaN  
+4              U                  NaN  
+5              U                  NaN  
+6              U                  NaN  
+7              U                  NaN  
+8              U                  NaN  
+9            NaN                  NaN  
+
+[10 rows x 22 columns]</code></pre>
+</div>
+</div>
+<p>From the sample, we can see that the CSV file contains the jail ID, the state, county, jail name, year, inmate’s date of death, their name (4 columns with full_name. last_name, first_name, and mid_name; all full_name values are empty), suffix, date_incarcerated, cause of death shortened into a code, full detail of cause of death, and demographic data (spanning the next 7 columns).</p>
+</section>
+<section id="section-2-exploring-trends-in-the-causes-of-death-and-the-death-tolls-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-2-exploring-trends-in-the-causes-of-death-and-the-death-tolls-1">Section 2: Exploring Trends in the Causes of Death, and the Death Tolls</h2>
+<p>For my first Exploratory Data Visualization, I want to explore the number of deaths per cause in California.</p>
+<div id="dfee2cf2" class="cell" data-trusted="true" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cause_descriptions <span class="op">=</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'S'</span>: <span class="st">'Suicide'</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'DA'</span>: <span class="st">'Drug/Alcohol-related'</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'IL'</span>: <span class="st">'Illness/Natural'</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'O'</span>: <span class="st">'Other'</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'HO'</span>: <span class="st">'Homicide'</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AC'</span>: <span class="st">'Accident'</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'M'</span>: <span class="st">'Medical'</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># replace shortened death cause codes with their descriptions</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>deaths_data[<span class="st">'cause_description'</span>] <span class="op">=</span> deaths_data[<span class="st">'cause_short'</span>].<span class="bu">map</span>(cause_descriptions)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>deaths_data_filtered <span class="op">=</span> deaths_data.dropna(subset<span class="op">=</span>[<span class="st">'cause_description'</span>])</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>deaths_by_cause_description <span class="op">=</span> deaths_data_filtered[<span class="st">'cause_description'</span>].value_counts()</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>deaths_by_cause_description.plot(kind<span class="op">=</span><span class="st">'bar'</span>, color<span class="op">=</span><span class="st">'skyblue'</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Cause of Death'</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Total Deaths'</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Total Deaths in California Jails by Cause'</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="finalproject_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From the above plot, we can see that medical-related deaths are the highest cause of death. This can include deaths by chronic diseases, acute medical conditions, infections, or untreated/under-treated conditions. The causes of death that follow are Suicide, Drug/Alcohol-related deaths, Accident, and Other causes.</p>
+<p>I decided to conduct further research to back this trend: <strong>1. The Sacramento Bee article, published on 11/08/23:</strong> https://www.sacbee.com/news/politics-government/the-state-worker/article281554588.html According to the watchdog report by the Office of the Inspector General, “a third of California’s (34, now 33) adult prisons provide an”inadequate” level of medical care to their inmate patients. The pandemic caused a decline in performance and contributed to the lack of quality care. 23 of the prisons earned “adequate” rankings while no facilities earned the top ranking of “proficient.”</p>
+<p><strong>2. KCRA Article, published on 06/27/24:</strong> https://www.kcra.com/article/federal-judges-fines-california-prison-system-mental-health-care/61446246 A federal judge recently fined the California prison system $112 million for not providing enough mental health care to inmates. The fine comes from the state cutting costs for the Department of Corrections and Rehabilitation. With the fine, the judge “ordered the state to put that money in a special account reserved for inmate help.” Moreover, 30% of rehabilitation-related occupations (social workers and psychiatrists) have not been filled for years.</p>
+<p><strong>3. Public Policy Institute of California report, published in June 2014:</strong> https://www.ppic.org/publication/health-care-for-californias-jail-population/ In 2012, there were 2.3 million health-care related visits that were provided to county jail inmates in California. This was 200,000 medical visits each month, which averages out to 2.4 medical visits per inmate.</p>
+<p>In the context of my visualization, a lack of good healthcare (in a third of adult prisons) and lack of funding are strong factors that influence the amount of medical-related deaths, making it the category with the highest amount of deaths. The next exploratory data visualization will plot out total inmate deaths per year.</p>
+<div id="712642fc" class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>deaths_data[<span class="st">'year'</span>] <span class="op">=</span> pd.to_datetime(deaths_data[<span class="st">'date_of_death'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>).dt.year</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>deaths_per_year <span class="op">=</span> deaths_data[<span class="st">'year'</span>].value_counts().sort_index()</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># filter out the year 2020 from the data, since data was collected 2008-2019</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>deaths_per_year_filtered <span class="op">=</span> deaths_per_year[deaths_per_year.index <span class="op">!=</span> <span class="fl">2020.0</span>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>deaths_per_year_filtered.plot(kind<span class="op">=</span><span class="st">'bar'</span>, color<span class="op">=</span><span class="st">'skyblue'</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Total Deaths'</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Total Deaths in California Jails by Year'</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="finalproject_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The above visualization has an overall positive trend in death tolls over time. There are years where it will dip (like 2011, 2016, 2018), but from 2008 to 2019, the deaths are strictly increasing. We will ignore 2020 since the collected data from Reuters is intended to be from 2008 to 2019.</p>
+<p><strong>What does this data visualization suggest about the state of California jails?</strong> 1. Quality of healthcare in jails have dropped over time, leaving inmates neglected and therefore leading to higher deaths over time. 2. The California government has cut costs for jails over time.</p>
+<p><strong>Source to back my claims:</strong> 1. <strong>CalMatters article, published on 03/25/24:</strong> https://calmatters.org/justice/2024/03/death-in-california-jails/ This article has more deaths than what was in the Reuters dataset. More than 2,700 people have died in California jails since 2005. The article is also critical of Newsom’s promises to prevent deaths in 2019; ever since 2019, more people have died in jails, “hitting a high of 215 in 2022.” The article states that natural causes are the biggest share of deaths, with suicides following right after. This connects to an analysis of mental health resources in prisons later in this notebook. The third largest share of deaths were caused by drug overdoses, like accidental deaths caused by fentanyl overdoses.</p>
+</section>
+<section id="section-3-gender-disparities-in-california-jails-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-3-gender-disparities-in-california-jails-1">Section 3: Gender Disparities in California Jails</h2>
+<p>In this section, I will analyze the data to understand gender disparities in California jail between men and women inmates. Let’s start by analyzing the amount of male deaths and the amount of female deaths in California jails.</p>
+<div id="1336b612" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># filter out rows where the person's gender is missing</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>deaths_data_filtered <span class="op">=</span> deaths_data.dropna(subset<span class="op">=</span>[<span class="st">'gender'</span>])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># count number of deaths for each gender</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>deaths_by_gender <span class="op">=</span> deaths_data_filtered[<span class="st">'gender'</span>].value_counts()</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>deaths_by_gender.plot(kind<span class="op">=</span><span class="st">'bar'</span>, color<span class="op">=</span>[<span class="st">'skyblue'</span>, <span class="st">'lightcoral'</span>])</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Gender'</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Total Deaths'</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Total Deaths in California Jails by Gender'</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="finalproject_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The above plot shows that there are much more deaths for male inmates than female inmates. This inequality suggests that there are higher male incarceration rates in California. What else does it suggest?</p>
+<ol type="1">
+<li>Men and women might be incarcerated for different types of crimes, with men more likely to be incarcerated for longer sentences or more severe crimes.</li>
+<li>There are differences in health and risk behaviors between men and women. This includes substance abuse, violence, or neglected medical treatment of inmates caused by lack of resources and triaging issues.</li>
+<li>Quality of healthcare may differ by gender. If male facilities are overcrowded with less healthcare access, then this could contribute to higher male death tolls.</li>
+</ol>
+<p>When seeking existing research to back my claims above, the research actually does not support these claims, or the visualization. This could suggest that the data collection methods were skewed more towards male-only facilities. 1. Improving Access to Health Care for California’s Women Prisoners by Nancy Stoller: chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.prisonlegalnews.org/media/publications/improving_health_care_for_ca_women_prisoners_2001.pdf Women have higher barriers to healthcare access, since they have “unique health care needs associated with pregnancy, childbirth, and gynecological and breast health.” Women are also more likely to report “drug addictions and histories as victims of violence and sexual assault,” which opens them up to a wider range of needs and services that extend past the needs of male inmates.</p>
+<ol start="2" type="1">
+<li>The Gender Divide: Tracking Women’s State Prison Growth by Wendy Sawyer for Prison Policy Initiative, published 01/09/18: https://www.prisonpolicy.org/reports/women_overtime.html This report tracks prison population trends since 1978 for all 50 states. Over time, “women have become the fastest-growing segment of the incarcerated population.” To be specific, the women inmate population “grew 834% over nearly 40 years – more than double the pace of the growth among men.” This further suggests that the data collection by Reuters (for California) is biased towards male inmates; male deaths are higher than the women deaths, but the growth of the overall women inmate population has outpaced the male inmate population.</li>
+</ol>
+<p>The next visualization explores distribution of deaths by gender and age.</p>
+<div id="ecd23a03" class="cell" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter out rows where age or gender is missing</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>deaths_data_age_filtered <span class="op">=</span> deaths_data.dropna(subset<span class="op">=</span>[<span class="st">'age'</span>, <span class="st">'gender'</span>])</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>deaths_data_age_filtered[deaths_data_age_filtered[<span class="st">'gender'</span>] <span class="op">==</span> <span class="st">'M'</span>][<span class="st">'age'</span>].plot(kind<span class="op">=</span><span class="st">'hist'</span>, bins<span class="op">=</span><span class="dv">20</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">'Men'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>deaths_data_age_filtered[deaths_data_age_filtered[<span class="st">'gender'</span>] <span class="op">==</span> <span class="st">'F'</span>][<span class="st">'age'</span>].plot(kind<span class="op">=</span><span class="st">'hist'</span>, bins<span class="op">=</span><span class="dv">20</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">'Women'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Age'</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Age Distribution of Deceased in California Jails by Gender'</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="finalproject_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In the above visualization, we can see that the highest amount of men deaths are around 50 to 60 years old. The highest amount of women deaths are around 25 to 32 years old. This could be due to neglected health care for older men, with chronic illnesses/disorders. From the earlier research, the younger women deaths could be attributed to substance abuse and trauma. Sources to support this claim:</p>
+<ol type="1">
+<li><strong>Sex Differences in Risk Factors for Mortality After Release from Prison established by Minnesota Department of Corrections:</strong> chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://mn.gov/doc/assets/Gender%20and%20Mortality%20-%20DOC%20version_tcm1089-604411.pdf Even though this report is about risk factors for death after release from prison, we can extrapolate the death reasons for individuals held in jails for long periods of time. The report finds “that release type and frequency of healthcare access were more strongly related to mortality among women, while educational achievement was more strongly related to mortality among men.” This supports earlier analyses about how women have a wider range of healthcare needs, with unique needs related to pregnancy, gynecological health, and breast health.</li>
+<li><strong>Prison Policy:</strong> https://www.prisonpolicy.org/reports/pie2024women.html This report looks at the backgrounds of people in prison, as opposed to adminstrative data collected from prison system. It finds that “over half (58%) of women met the criteria for a substance use disorder the year before they went to prison, and over three-quarters (76%) had some indication of a past or current mental health problem,” which are much higher rates to their male counterparts.</li>
+</ol>
+</section>
+<section id="section-4-more-visualizations-and-concluding-remarks-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-4-more-visualizations-and-concluding-remarks-1">Section 4: More Visualizations and Concluding Remarks</h2>
+<p>The final data visualizations will aim to combine the ideas from the exploratory visualizations and build up to my concluding remarks.</p>
+<p>The next two visualizations will be cause of death by gender. I will aim to strengthen my claims made after analyzing each exploratory visualization, like understanding the separate healthcare needs by men and women, and how the neglect of those needs contribute to their death tolls. I will also seek to understand how the cause of death is attributed to the behavior patterns exhibited by men and women inmates, like how women inmates have higher rates of reported mental illness (as found in earlier research).</p>
+<p>Note that I split it up into two different charts instead of one because the high number of male deaths makes the female deaths harder to analyze from the chart.</p>
+<div id="7957f317" class="cell" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>cause_descriptions <span class="op">=</span> {</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'S'</span>: <span class="st">'Suicide'</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'DA'</span>: <span class="st">'Drug/Alcohol-related'</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'IL'</span>: <span class="st">'Illness/Natural'</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'O'</span>: <span class="st">'Other'</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'HO'</span>: <span class="st">'Homicide'</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AC'</span>: <span class="st">'Accident'</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'M'</span>: <span class="st">'Medical'</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>deaths_data[<span class="st">'cause_description'</span>] <span class="op">=</span> deaths_data[<span class="st">'cause_short'</span>].<span class="bu">map</span>(cause_descriptions)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># filter the data to include only necessary columns</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>deaths_data_filtered <span class="op">=</span> deaths_data[[<span class="st">'gender'</span>, <span class="st">'cause_description'</span>]]</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co"># count number of deaths for each cause by gender</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>deaths_by_gender_and_cause <span class="op">=</span> deaths_data_filtered.groupby([<span class="st">'gender'</span>, <span class="st">'cause_description'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'count'</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>deaths_pivot <span class="op">=</span> deaths_by_gender_and_cause.pivot(index<span class="op">=</span><span class="st">'gender'</span>, columns<span class="op">=</span><span class="st">'cause_description'</span>, values<span class="op">=</span><span class="st">'count'</span>).fillna(<span class="dv">0</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>deaths_pivot_men <span class="op">=</span> deaths_pivot.loc[[<span class="st">'M'</span>]]</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>deaths_pivot_women <span class="op">=</span> deaths_pivot.loc[[<span class="st">'F'</span>]]</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co"># stacked bar chart for men</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>deaths_pivot_men.plot(kind<span class="op">=</span><span class="st">'bar'</span>, stacked<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>), colormap<span class="op">=</span><span class="st">'tab20'</span>)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Gender (Men)'</span>)</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Total Deaths'</span>)</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Total Deaths in California Jails by Cause (Men)'</span>)</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">'Cause of Death'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.05</span>, <span class="dv">1</span>), loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="co"># stacked bar chart for women</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>deaths_pivot_women.plot(kind<span class="op">=</span><span class="st">'bar'</span>, stacked<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>), colormap<span class="op">=</span><span class="st">'tab20'</span>)</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Gender (Women)'</span>)</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Total Deaths'</span>)</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Total Deaths in California Jails by Cause (Women)'</span>)</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">'Cause of Death'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.05</span>, <span class="dv">1</span>), loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 1200x600 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="finalproject_files/figure-html/cell-7-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 1200x600 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="finalproject_files/figure-html/cell-7-output-4.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From the above charts, we can analyze the shares of death by each cause of death. Women had a higher share of Drug/Alcohol related deaths than men. Both groups have “medical” related deaths as their highest cause of death.</p>
+<p>Let’s also analyze the number of deaths per county jail in California as our final data visualization, and call back earlier research to build up the concluding remarks.</p>
+<div id="23ac33fc" class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data to include only necessary columns</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>deaths_data_filtered <span class="op">=</span> deaths_data[[<span class="st">'jail'</span>, <span class="st">'gender'</span>]]</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the number of deaths for each jail facility</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>deaths_by_jail <span class="op">=</span> deaths_data_filtered[<span class="st">'jail'</span>].value_counts().reset_index()</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>deaths_by_jail.columns <span class="op">=</span> [<span class="st">'jail'</span>, <span class="st">'count'</span>]</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the data</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">7</span>))</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>deaths_by_jail, x<span class="op">=</span><span class="st">'count'</span>, y<span class="op">=</span><span class="st">'jail'</span>, palette<span class="op">=</span><span class="st">'viridis'</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Total Deaths'</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Jail Facility'</span>)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Total Deaths in California Jails by Facility'</span>)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/pf/f0c0xkcd6ns9h2v0mmkzpp3c0000gn/T/ipykernel_91221/3404986165.py:14: FutureWarning:
+
+
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `y` variable to `hue` and set `legend=False` for the same effect.
+
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="finalproject_files/figure-html/cell-8-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From the above chart, we can see which California jails have the most deaths. The LA County jail system has the most, followed by San Diego. While analyzing the chart, you can observe that a lot of the top death tolls come from Southern California jails. This could suggest lack of funding or resources in those Southern California jails.</p>
+<p><strong>Sources:</strong> 1. <strong>Analysis of Prison Health Care in Southern California, published in December 2021:</strong> chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://scholarworks.calstate.edu/downloads/9c67wv17g This report explores the funding that certain California jails receive, and how inadequate the funding is for tending to inmates. One of the prisons with poor funding is Calipatria State Prison (in Southern California), where “the entire cost of non-labor-related medical care (adjusted by a cost-of-living adjustment component) is only $52 per inmate per month.” For California Men’s Colony in San Luis Obispo county, “this medical care cost totals $217 per inmate, per month.”</p>
+<section id="concluding-remarks-about-my-research-question" class="level3">
+<h3 class="anchored" data-anchor-id="concluding-remarks-about-my-research-question">Concluding Remarks About My Research Question</h3>
+<p>Let’s revisit my initial question: <strong>“What are the leading factors that influence death tolls in California jails and how can they be mitigated?”</strong></p>
+<p>The leading factors are: 1. Lack of quality health care in prisons 2. Neglect of mental health issues and drug/substance abuse 3. Lack of funding for jails</p>
+<p>How can these factors be mitigated in order to prevent future deaths in jails? 1. As explored earlier, California was fined $112 million for not providing quality mental health care to inmates; the state attempted to cut costs for the Department of Corrections and Rehabilitation. The federal judge that fined the state required that the fine be used for inmate help, which is a good first step. These funds can be used to fill the demand for healthcare. 2. Increase supply of healthcare resources to curb the demand for healthcare. As found in earlier research, in 2012, there were 2.3 million health-care related visits that were provided to county jail inmates in California, averaging out to 2.4 medical visits per inmate. With preventive healthcare, inmate deaths can be reduced. 3. Using the chart for deaths per jail facility, we can understand which county jail systems need the most funding, and allocate the funds as such. For example, Los Angeles could receive the largest share of funding since its jail system has the most deaths. 4. Incentivize social workers and psychiatrists to fill positions in jails through higher pay and better benefits. As found in earlier research, 30% of rehabilitation-related occupations have not been filled for year.</p>
+</section>
+<section id="concluding-remarks-about-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="concluding-remarks-about-the-data">Concluding Remarks About The Data</h3>
+<p>The data for California inmate deaths was biased towards men inmate deaths, with more than 1000 male deaths and less than 200 women inmate deaths. I was able to find the leading factors for inmate deaths through my data analysis. However, understanding the behaviors of demographics, especially women inmates, was difficult just from looking at the data. This is where I did some more external research to understand how behaviors of women inmates can contribute to the inmate death toll.</p>
+<p>Overall, from this project, I learned a lot about how to make meaningful claims out of a dataset and back those claims using outside sources. This was my first time ever analyzing a dataset using a Python notebook, and first time learning about the grave reasons for deaths in jails.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

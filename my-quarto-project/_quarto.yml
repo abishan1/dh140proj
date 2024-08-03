@@ -1,0 +1,19 @@
+project:
+  type: website
+
+website:
+  title: "DH 140 Final Project"
+  navbar:
+    left:
+      - text: Home
+        href: index.qmd
+      - text: About
+        href: about.qmd
+      - text: Project
+        href: finalproject.ipynb
+
+format:
+  html:
+    theme: default
+
+author: "Abishan Sutharshan"
